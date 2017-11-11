@@ -1,0 +1,29 @@
+{
+    "name": "pashamray/php-screen",
+    "description": "PHP screen manager",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Paul Shamray",
+            "email": "pashamray@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/pashamray/php-discovery-shell"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "pashamray/discovery-shell": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "pashamray\\phpscreen\\": "src/"
+        }
+    }
+}
