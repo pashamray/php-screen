@@ -10,6 +10,10 @@ namespace pashamray\phpscreen;
 
 class Screen
 {
+    const SCREEN_STATUS_ACTIVE = 'active';
+    const SCREEN_STATUS_INACTIVE = 'inactive';
+    const SCREEN_STATUS_ERROR = 'error';
+
     private $log_dir;
 
     public function __construct($log_dir = null)
@@ -82,6 +86,15 @@ class Screen
         $get_log_file = file_get_contents($log_file);
 
         return $get_log_file;
+    }
+
+    public function screenStatus($session)
+    {
+        $ttys = array_map(function ($val) {
+            return explode('.', $val)[1];
+        }, $this->screenList());
+
+        return in_array($session, $ttys) ? self::SCREEN_STATUS_ACTIVE : self::SCREEN_STATUS_INACTIVE;
     }
 
     /**
