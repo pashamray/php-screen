@@ -68,7 +68,7 @@ class Screen
      */
     public function screenWrite($session, $line)
     {
-        $output = shell_exec('screen -S '.$session.' -X stuff '.$line."\n");
+        $output = shell_exec('screen -S '.$session.' -X stuff '.$line.'^M');
         return $output;
     }
 
@@ -110,6 +110,19 @@ class Screen
         return $output;
     }
 
+    public function screenStop($session)
+    {
+        $list = $this->screenList();
+        
+        array_walk($list, function ($val, $key) use ($session) {
+            $tty = explode(".", $val)[1];
+            if($session == $tty) {
+                shell_exec('screen -S '.$val.' -X quit');
+            }
+        });
+        return true;
+    }
+    
     private function getLogFileName($session)
     {
         return $this->log_dir.'/php-screen_'.$session.'.log';
